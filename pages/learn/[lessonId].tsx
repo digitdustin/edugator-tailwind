@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "@mui/styles";
 import theme from "constants/theme";
@@ -9,6 +9,7 @@ import {
   Alert,
   Grow,
   Typography,
+  IconButton
 } from "@mui/material";
 import { Node, Markup } from "interweave";
 import MultipleChoiceQuestion from "components/LearnPage/MultipleChoiceQuestion";
@@ -19,8 +20,20 @@ import { useRouter } from "next/router";
 import { useFetchLesson } from "hooks/useFetchLesson";
 import { FetchStatus } from "hooks/types";
 import { LessonBlock } from "lib/shared/types";
+import { useReactToPrint } from "react-to-print";
+import DownloadIcon from '@mui/icons-material/Download';
 
-export default function LearnPage() {
+class ComponentToPrint extends React.Component {
+  render() {
+    return (
+      <div style={{ padding: '20px 70px' }}>
+        <LearnPageContent />
+      </div>
+    );
+  }
+}
+
+function LearnPageContent() {
   let questionCount = 1;
 
   const router = useRouter();
@@ -265,7 +278,30 @@ export default function LearnPage() {
             })}
           </LessonHolder>
         </div>
-      )}
+      )
+      }
+    </>
+  );
+}
+
+export default function LearnPage() {
+  const componentRef = useRef(null);
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  return (
+    <>
+      <div style={{ display: 'none' }}>
+        <ComponentToPrint ref={componentRef} />
+      </div>
+
+      <IconButton
+        onClick={() => handlePrint()}
+      >
+        <DownloadIcon />
+      </IconButton>
+      <LearnPageContent />
     </>
   );
 }
