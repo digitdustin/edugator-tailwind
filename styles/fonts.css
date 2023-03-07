@@ -14,9 +14,3 @@
     src: url('../public/fonts/ambit/Ambit-Bold.otf');
     font-weight: bold;
 }
-
-@font-face {
-    font-family: 'Ambit';
-    src: url('../public/fonts/ambit/Ambit-Semibold.otf');
-    font-weight: 600;
-}
