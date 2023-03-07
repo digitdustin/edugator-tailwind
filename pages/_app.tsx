@@ -24,6 +24,8 @@ import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
 
+// for deploy
+
 type Page<P = {}> = NextPage<P> & {
   getLayout?: (page: ReactNode) => ReactNode;
 };
