@@ -23,7 +23,6 @@ import "styles/scrollbar.css";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
-import CustomFont from "@next/font/local";
 
 // for deploy
 
